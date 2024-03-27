@@ -1,8 +1,13 @@
+// import localFont from 'next/font/local'
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
 import './globals.css'
+import StoreProvider from './StoreProvider'
 
-const inter = Inter({ subsets: ['latin'] })
+// const bmJua = localFont({
+//   src: '../public/fonts/BMJUA_woff2.woff2',
+//   display: 'swap',
+//   variable: '--font-bmjua',
+// })
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -15,8 +20,10 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
-    </html>
+    <StoreProvider>
+      <html lang="ko">
+        <body className="">{children}</body>
+      </html>
+    </StoreProvider>
   )
 }
