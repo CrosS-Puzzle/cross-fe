@@ -1,13 +1,15 @@
-// import localFont from 'next/font/local'
+import localFont from 'next/font/local'
 import type { Metadata } from 'next'
 import './globals.css'
+
 import StoreProvider from './StoreProvider'
 
-// const bmJua = localFont({
-//   src: '../public/fonts/BMJUA_woff2.woff2',
-//   display: 'swap',
-//   variable: '--font-bmjua',
-// })
+const pretendard = localFont({
+  src: '../fonts/PretendardVariable.woff2',
+  display: 'swap',
+  weight: '45 920',
+  variable: '--font-pretendard',
+})
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -22,7 +24,9 @@ export default function RootLayout({
   return (
     <StoreProvider>
       <html lang="ko">
-        <body className="">{children}</body>
+        <body className={`${pretendard.variable} font-pretendard`}>
+          {children}
+        </body>
       </html>
     </StoreProvider>
   )
