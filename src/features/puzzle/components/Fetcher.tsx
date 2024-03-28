@@ -13,9 +13,8 @@ export default function PuzzleFetcher({
   children: ReactNode
 }) {
   const { initiatePuzzle } = usePuzzle()
-  // @ts-ignore
   const { data, error } = useQuery({
-    queryKey: ['puzzle'],
+    queryKey: ['puzzle', id],
     queryFn: () => getPuzzle(id, false),
   })
 
@@ -27,5 +26,5 @@ export default function PuzzleFetcher({
     initiatePuzzle(data)
   }
 
-  return <>{children}</>
+  return children
 }

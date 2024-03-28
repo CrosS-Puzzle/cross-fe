@@ -17,7 +17,7 @@ export const usePuzzle = () => {
   const dispatch = useAppDispatch()
 
   const puzzle = useAppSelector(selectPuzzle)
-  const selectedWord = useAppSelector(selectSelectedWord)
+  const currentWord = useAppSelector(selectSelectedWord)
   const solvedCount = useAppSelector(selectSolvedCount)
   const totalCount = useAppSelector(selectTotalCount)
 
@@ -74,7 +74,7 @@ export const usePuzzle = () => {
     resetCurrentWord,
     setCurrentWord,
     puzzle,
-    selectedWord,
+    currentWord,
     solvedCount,
     totalCount,
   }

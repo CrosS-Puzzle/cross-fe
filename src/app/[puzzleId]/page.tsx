@@ -8,8 +8,8 @@ export default async function ({
   }
 }) {
   return (
-    <>
+    <div className="w-full h-full">
       <Puzzle id={params.puzzleId} />
-    </>
+    </div>
   )
 }
