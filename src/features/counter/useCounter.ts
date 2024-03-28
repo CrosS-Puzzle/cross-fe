@@ -1,12 +1,11 @@
 import { useAppSelector, useAppDispatch } from '@/store/hooks'
 import { RootState } from '@/store/store'
-import { increment, decrement } from './counterSlice'
+import { increment, decrement, selectCount } from './counterSlice'
 
 const useCounter = () => {
   const dispatch = useAppDispatch()
-  const { count } = useAppSelector((state: RootState) => ({
-    count: state.counter.value,
-  }))
+
+  const count = useAppSelector(selectCount)
 
   const increase = () => {
     dispatch(increment())

@@ -1,12 +1,21 @@
-import { configureStore } from '@reduxjs/toolkit'
+import { combineReducers, configureStore } from '@reduxjs/toolkit'
 import { counterSlice } from '@/features/counter/counterSlice'
+import { puzzleSlice } from '@/features/puzzle/store/puzzleSlice'
+
+const reducers = combineReducers({
+  puzzle: puzzleSlice.reducer,
+  counter: counterSlice.reducer,
+})
+
+// TODO: persistConfig with redux-persist
 
 export const makeStore = () => {
   return configureStore({
-    reducer: {
-      // Add reducers here
-      counter: counterSlice.reducer,
-    },
+    reducer: reducers,
+    middleware: (getDefaultMiddleware) =>
+      getDefaultMiddleware({
+        serializableCheck: false,
+      }),
   })
 }
 

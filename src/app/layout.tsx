@@ -3,6 +3,7 @@ import type { Metadata } from 'next'
 import './globals.css'
 
 import StoreProvider from './StoreProvider'
+import Provider from '@/utils/QueryProviders'
 
 const pretendard = localFont({
   src: '../fonts/PretendardVariable.woff2',
@@ -25,7 +26,7 @@ export default function RootLayout({
     <StoreProvider>
       <html lang="ko">
         <body className={`${pretendard.variable} font-pretendard`}>
-          {children}
+          <Provider>{children}</Provider>
         </body>
       </html>
     </StoreProvider>
