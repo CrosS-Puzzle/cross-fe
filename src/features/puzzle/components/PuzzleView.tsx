@@ -27,8 +27,12 @@ export default function PuzzleView() {
       style={{
         width: `${width}px`,
         height: `${height}px`,
+        maxWidth: '100vw',
+        maxHeight: '75vh',
       }}
     >
+      <Status />
+
       {Object.keys(answerInfos).map((wordId: string) => {
         const { coords, length, word, direction } = answerInfos[
           wordId

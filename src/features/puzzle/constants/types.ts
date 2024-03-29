@@ -23,9 +23,15 @@ export type Word = {
   description: string
 }
 
+// redux-states
 export type PuzzleState = {
   puzzle: Puzzle | null
   totalWords: number
   solvedWords: number
   selectedWord: string | null
+}
+
+export type HistoryState = {
+  checked: string[]
+  solved: string[]
 }

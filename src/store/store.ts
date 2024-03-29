@@ -1,20 +1,40 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
+import storage from 'redux-persist/lib/storage'
 import { counterSlice } from '@/features/counter/counterSlice'
 import { puzzleSlice } from '@/features/puzzle/store/puzzleSlice'
+import { historySlice } from '@/features/puzzle/store/historySlice'
+import { persistReducer } from 'redux-persist'
+import {
+  FLUSH,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+  REHYDRATE,
+} from 'redux-persist/es/constants'
 
 const reducers = combineReducers({
   puzzle: puzzleSlice.reducer,
   counter: counterSlice.reducer,
+  history: historySlice.reducer,
 })
 
-// TODO: persistConfig with redux-persist
+const persistConfig = {
+  key: 'puzzle-history',
+  storage,
+  whitelist: ['history'],
+}
+
+const persistedReducers = persistReducer(persistConfig, reducers)
 
 export const makeStore = () => {
   return configureStore({
-    reducer: reducers,
+    reducer: persistedReducers,
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware({
-        serializableCheck: false,
+        serializableCheck: {
+          ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+        },
       }),
   })
 }

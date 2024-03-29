@@ -18,14 +18,12 @@ export default async function Puzzle({ id }: { id: string }) {
   })
 
   return (
-    <div className="w-fit h-fit">
-      <Suspense fallback={<div>Loading...</div>}>
-        <HydrationBoundary state={dehydrate(queryClient)}>
-          <Fetcher id={id}>
-            <Container />
-          </Fetcher>
-        </HydrationBoundary>
-      </Suspense>
-    </div>
+    <Suspense fallback={<div>Loading...</div>}>
+      <HydrationBoundary state={dehydrate(queryClient)}>
+        <Fetcher id={id}>
+          <Container />
+        </Fetcher>
+      </HydrationBoundary>
+    </Suspense>
   )
 }
