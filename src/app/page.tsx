@@ -1,15 +1,48 @@
-export default function Home() {
+import { getCategories } from '@/server/category.actions'
+import Link from 'next/link'
+import React from 'react'
+
+export default async function Home() {
+  const categories = await getCategories()
+
   return (
-    <main className="p-2 text-lg">
-      <p className="font-pretendard font-black">Pretendard Black</p>
-      <p className="font-pretendard font-extrabold">Pretendard ExtraBold</p>
-      <p className="font-pretendard font-bold">Pretendard Bold</p>
-      <p className="font-pretendard font-semibold">Pretendard SemiBold</p>
-      <p className="font-pretendard font-medium">Pretendard Medium</p>
-      <p className="font-pretendard font-normal">Pretendard Regular</p>
-      <p className="font-pretendard font-light">Pretendard Light</p>
-      <p className="font-pretendard font-extralight">Pretendard ExtraLight</p>
-      <p className="font-pretendard font-thin">Pretendard Thin</p>
-    </main>
+    <>
+      <h2 className="mt-20 text-2xl font-bold tracking-tighter lg:text-3xl xl:text-4xl">
+        CS 용어 가로세로 낱말 퍼즐
+      </h2>
+      <p className="max-w-[600px] text-neutral-500 text-sm/relaxed lg:text-base/relaxed xl:text-lg/relaxed">
+        ChatGPT 로 생성된 CS 용어와 설명으로 낱말퍼즐이 만들어져 있습니다.
+      </p>
+      <p className="text-neutral-500 pb-4">아래에서 카테고리를 선택해주세요.</p>
+
+      <div className="w-full max-w-[480px]">
+        <h3 className="text-left pb-2 font-bold">카테고리</h3>
+        <ul>
+          {categories.length > 0 &&
+            categories.map(
+              (category: {
+                id: string
+                koreanName: string
+                puzzleCount: number
+              }) => {
+                return (
+                  <li
+                    key={category.id}
+                    className={`group text-neutral-800 hover:bg-neutral-300 hover:text-neutral-950 rounded-sm px-1 pt-1`}
+                  >
+                    <Link
+                      href={`/${category.id}`}
+                      className="w-full flex flex-row justify-between items-center pb-1 mb-1 border-b border-neutral-300"
+                    >
+                      <span className="text-sm">{category.koreanName}</span>
+                      <span className="text-xs">{category.puzzleCount}</span>
+                    </Link>
+                  </li>
+                )
+              },
+            )}
+        </ul>
+      </div>
+    </>
   )
 }

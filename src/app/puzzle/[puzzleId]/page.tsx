@@ -1,4 +1,5 @@
 import Puzzle from '@/features/puzzle/Puzzle'
+import Link from 'next/link'
 
 export default async function ({
   params,

@@ -2,6 +2,24 @@
 
 const API_BASE_URL = 'https://api.cross-word.online/v1'
 
+export async function getPuzzles(
+  catId: string,
+  sortBy: 'asc' | 'desc',
+  { pageParam = 0 },
+) {
+  try {
+    const response = await fetch(
+      `${API_BASE_URL}/puzzle/list?category=${catId}&sort=${sortBy}&page=${pageParam}`,
+    )
+
+    const responseBody = await response.json()
+
+    return responseBody.data
+  } catch (error) {
+    return { error: error }
+  }
+}
+
 export async function getPuzzle(id: string, withAnswer: boolean = false) {
   try {
     const response = await fetch(

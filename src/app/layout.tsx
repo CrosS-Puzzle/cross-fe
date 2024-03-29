@@ -4,6 +4,8 @@ import './globals.css'
 
 import StoreProvider from './StoreProvider'
 import Provider from '@/utils/QueryProviders'
+import React from 'react'
+import Header from '@/features/header/Header'
 
 const pretendard = localFont({
   src: '../fonts/PretendardVariable.woff2',
@@ -23,12 +25,19 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <StoreProvider>
-      <html lang="ko">
-        <body className={`${pretendard.variable} font-pretendard`}>
-          <Provider>{children}</Provider>
-        </body>
-      </html>
-    </StoreProvider>
+    <html lang="ko">
+      <body className={`${pretendard.variable} font-pretendard`}>
+        <StoreProvider>
+          <Provider>
+            <Header />
+            <main className="pt-12 lg:h-screen">
+              <div className="flex flex-col items-center justify-start space-y-4 text-center break-keep">
+                {children}
+              </div>
+            </main>
+          </Provider>
+        </StoreProvider>
+      </body>
+    </html>
   )
 }

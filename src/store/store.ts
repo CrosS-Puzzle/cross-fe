@@ -3,7 +3,7 @@ import storage from 'redux-persist/lib/storage'
 import { counterSlice } from '@/features/counter/counterSlice'
 import { puzzleSlice } from '@/features/puzzle/store/puzzleSlice'
 import { historySlice } from '@/features/puzzle/store/historySlice'
-import { persistReducer } from 'redux-persist'
+import { persistReducer, persistStore } from 'redux-persist'
 import {
   FLUSH,
   PAUSE,
@@ -11,13 +11,7 @@ import {
   PURGE,
   REGISTER,
   REHYDRATE,
-} from 'redux-persist/es/constants'
-
-const reducers = combineReducers({
-  puzzle: puzzleSlice.reducer,
-  counter: counterSlice.reducer,
-  history: historySlice.reducer,
-})
+} from 'redux-persist'
 
 const persistConfig = {
   key: 'puzzle-history',
@@ -25,11 +19,15 @@ const persistConfig = {
   whitelist: ['history'],
 }
 
-const persistedReducers = persistReducer(persistConfig, reducers)
+const reducers = combineReducers({
+  puzzle: puzzleSlice.reducer,
+  counter: counterSlice.reducer,
+  history: historySlice.reducer,
+})
 
-export const makeStore = () => {
-  return configureStore({
-    reducer: persistedReducers,
+const makeConfiguredStore = () =>
+  configureStore({
+    reducer: reducers,
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware({
         serializableCheck: {
@@ -37,6 +35,22 @@ export const makeStore = () => {
         },
       }),
   })
+
+export const makeStore = () => {
+  const isServer = typeof window === 'undefined'
+
+  if (isServer) {
+    return makeConfiguredStore()
+  } else {
+    const persistedReducers = persistReducer(persistConfig, reducers)
+
+    let store: any = configureStore({
+      reducer: persistedReducers,
+    })
+
+    store.__persistor = persistStore(store)
+    return store
+  }
 }
 
 // Infer the type of makeStore
