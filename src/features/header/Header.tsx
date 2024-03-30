@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import Categories from '@/app/Category'
 
 export default function Header() {
   return (

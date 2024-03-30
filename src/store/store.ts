@@ -1,6 +1,5 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
 import storage from 'redux-persist/lib/storage'
-import { counterSlice } from '@/features/counter/counterSlice'
 import { puzzleSlice } from '@/features/puzzle/store/puzzleSlice'
 import { historySlice } from '@/features/puzzle/store/historySlice'
 import { persistReducer, persistStore } from 'redux-persist'
@@ -21,7 +20,6 @@ const persistConfig = {
 
 const reducers = combineReducers({
   puzzle: puzzleSlice.reducer,
-  counter: counterSlice.reducer,
   history: historySlice.reducer,
 })
 
