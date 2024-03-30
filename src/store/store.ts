@@ -44,7 +44,7 @@ export const makeStore = () => {
 
   const persistedReducers = persistReducer(persistConfig, reducers)
 
-  const store = configureStore({
+  const store: any = configureStore({
     reducer: persistedReducers,
   })
 

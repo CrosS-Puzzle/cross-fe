@@ -1,4 +1,4 @@
-import { getCategories } from '@/server/category.actions'
+import getCategories from '@/server/category.actions'
 import Link from 'next/link'
 import React from 'react'
 
