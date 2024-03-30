@@ -8,11 +8,13 @@ import React, {
   useState,
 } from 'react'
 import { useInfiniteQuery } from '@tanstack/react-query'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import { getPuzzles } from '@/server/puzzle.actions'
 import Link from 'next/link'
+import BackIcon from '@/icons/Back'
 
 export default function Puzzles() {
+  const router = useRouter()
   const observerElem = useRef(null)
   const [sortBy, setSortBy] = useState<'asc' | 'desc'>('asc')
   const pathname = usePathname()
@@ -80,13 +82,22 @@ export default function Puzzles() {
       <p className="max-w-[600px] text-neutral-500 text-sm/relaxed lg:text-base/relaxed xl:text-lg/relaxed">
         ChatGPT 로 생성된 CS 용어와 설명으로 낱말퍼즐이 만들어져 있습니다.
       </p>
+
       <p className="text-neutral-500 pb-4">아래에서 문제를 선택해주세요.</p>
 
       <h3 className="font-bold text-base lg:text-2xl">
         {data && data.pages[0].categories[0]} 퍼즐
       </h3>
 
-      <div className="w-full max-w-[480px] flex flex-row items-center justify-end">
+      <div className="w-full max-w-[480px] flex flex-row items-center justify-between">
+        <button
+          onClick={() => router.back()}
+          className="flex flex-row items-center"
+        >
+          <BackIcon width={16} height={16} />
+          <span className="text-xs">돌아가기</span>
+        </button>
+
         <div>
           <span className="text-sm text-neutral-500 pr-2">정렬기준</span>
           <select
