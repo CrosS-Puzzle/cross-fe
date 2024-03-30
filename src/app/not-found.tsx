@@ -1,20 +1,6 @@
-'use client' // Error components must be Client Components
-
-import { useEffect } from 'react'
 import Link from 'next/link'
 
-export default function Error({
-  error,
-  reset,
-}: {
-  error: Error & { digest?: string }
-  reset: () => void
-}) {
-  useEffect(() => {
-    // Log the error to an error reporting service
-    console.error(error)
-  }, [error])
-
+export default function NotFound() {
   return (
     <div className="container w-full min-h-[100vh-64px] md:min-h-[100vh-80px] flex flex-col items-center justify-center pt-32">
       <svg
@@ -31,7 +17,7 @@ export default function Error({
         <ellipse cx="10.825" cy="16.711" rx="1.275" ry="1.322" />
       </svg>
       <h1 className="text-2xl lg:text-3xl font-semibold text-neutral-900">
-        존재하지 않는 퍼즐입니다.
+        페이지가 존재하지 않습니다.
       </h1>
       <Link
         href="/"

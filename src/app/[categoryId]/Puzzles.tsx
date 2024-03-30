@@ -51,6 +51,7 @@ export default function Puzzles() {
     [fetchNextPage, hasNextPage],
   )
 
+  // for 무한 스크롤
   useEffect(() => {
     const element = observerElem.current
     let options = {
