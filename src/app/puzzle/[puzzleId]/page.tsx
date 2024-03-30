@@ -9,7 +9,7 @@ export default async function ({
   }
 }) {
   return (
-    <div className="w-full h-full">
+    <div className="w-fit h-full">
       <Puzzle id={params.puzzleId} />
     </div>
   )

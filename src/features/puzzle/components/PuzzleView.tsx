@@ -3,7 +3,6 @@
 import { twMerge } from 'tailwind-merge'
 import { usePuzzle } from '@/features/puzzle/store/usePuzzle'
 import { AnswerInfo } from '@/features/puzzle/constants/types'
-import Status from '@/features/puzzle/components/Status'
 
 export default function PuzzleView() {
   const { puzzle, setCurrentWord, currentWord } = usePuzzle()
@@ -14,8 +13,8 @@ export default function PuzzleView() {
 
   const { rowSize, colSize, answerInfos } = puzzle
 
-  const width = colSize * 68 + 4
-  const height = rowSize * 68 + 4
+  const width = colSize * 68 + 8
+  const height = rowSize * 68 + 8
 
   const handleWordClick = (id: string) => {
     setCurrentWord(id)
@@ -28,11 +27,9 @@ export default function PuzzleView() {
         width: `${width}px`,
         height: `${height}px`,
         maxWidth: '100vw',
-        maxHeight: '75vh',
+        maxHeight: '65vh',
       }}
     >
-      <Status />
-
       {Object.keys(answerInfos).map((wordId: string) => {
         const { coords, length, word, direction } = answerInfos[
           wordId

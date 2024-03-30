@@ -22,7 +22,7 @@ export default function Puzzles() {
     return await getPuzzles(categoryId, sortBy, { pageParam })
   }
 
-  const { data, isError, isLoading, hasNextPage, fetchNextPage } =
+  const { data, isError, error, isLoading, hasNextPage, fetchNextPage } =
     useInfiniteQuery({
       queryKey: ['puzzles', categoryId, sortBy],
       queryFn: fetchPuzzles,
@@ -66,17 +66,15 @@ export default function Puzzles() {
     }
   }, [fetchNextPage, hasNextPage, handleObserver])
 
-  if (!data || isError) {
-    throw new Error('잘못된 접근입니다.')
-  }
-
-  if (isLoading) {
-    return <p>퍼즐 정보를 불러오는 중입니다.</p>
+  if (isError) {
+    throw new Error(
+      '퍼즐을 불러오는 데에 문제가 발생했습니다. 잠시 후, 다시 시도해주세요.',
+    )
   }
 
   return (
     <>
-      <h2 className="mt-20 text-2xl font-bold tracking-tighter lg:text-3xl xl:text-4xl">
+      <h2 className="mt-10 text-2xl font-bold tracking-tighter lg:text-3xl xl:text-4xl">
         CS 용어 가로세로 낱말 퍼즐
       </h2>
       <p className="max-w-[600px] text-neutral-500 text-sm/relaxed lg:text-base/relaxed xl:text-lg/relaxed">
@@ -85,7 +83,7 @@ export default function Puzzles() {
       <p className="text-neutral-500 pb-4">아래에서 문제를 선택해주세요.</p>
 
       <h3 className="font-bold text-base lg:text-2xl">
-        {data.pages[0].categories[0]} 퍼즐
+        {data && data.pages[0].categories[0]} 퍼즐
       </h3>
 
       <div className="w-full max-w-[480px] flex flex-row items-center justify-end">
@@ -93,40 +91,49 @@ export default function Puzzles() {
           <span className="text-sm text-neutral-500 pr-2">정렬기준</span>
           <select
             onChange={handleOnChange}
+            value={sortBy}
             className="border px-2 rounded-full border-neutral-500 bg-transparent text-sm text-neutral-500 hover:bg-neutral-300 hover:text-neutral-950"
           >
-            <option value="desc">정답률 높은 순</option>
             <option value="asc">정답률 낮은 순</option>
+            <option value="desc">정답률 높은 순</option>
           </select>
         </div>
       </div>
 
-      <ul className="w-full max-w-[480px] h-full max-h-[calc(100vh-400px)] gap-y-2 overflow-auto">
-        {data.pages.map((group, i) => (
-          <Fragment key={i}>
-            {group.puzzles.map(
-              (puzzle: { id: string; wins: number; views: number }) => {
-                const winRate =
-                  ((puzzle.wins / puzzle.views) * 100 || 0).toFixed(1) || 0
+      {isLoading && <p>퍼즐목록을 조회하는 중입니다.</p>}
 
-                return (
-                  <li key={puzzle.id} className="pb-1 w-full">
-                    <Link
-                      href={`/puzzle/${puzzle.id}`}
-                      className="px-2 py-1 rounded-md flex flex-row items-center justify-between text-neutral-600 hover:bg-neutral-300 hover:text-neutral-950"
-                    >
-                      <p className="text-sm ">
-                        {group.categories[0] + ' - ' + puzzle.id.toUpperCase()}
-                      </p>
-                      <p className="text-sm">{winRate + '%'}</p>
-                    </Link>
-                  </li>
-                )
-              },
-            )}
-          </Fragment>
-        ))}
+      <ul className="w-full max-w-[480px] h-full max-h-[calc(100vh-360px)] gap-y-2 overflow-auto">
+        {data &&
+          data.pages.map((group, i) => (
+            <Fragment key={i}>
+              {group.puzzles.map(
+                (puzzle: { id: string; wins: number; views: number }) => {
+                  const winRate =
+                    ((puzzle.wins / puzzle.views) * 100 || 0).toFixed(1) || 0
+
+                  return (
+                    <li key={puzzle.id} className="pb-1 w-full">
+                      <Link
+                        href={`/puzzle/${puzzle.id}`}
+                        className="px-2 py-1 rounded-md flex flex-row items-center justify-between text-neutral-600 hover:bg-neutral-300 hover:text-neutral-950"
+                      >
+                        <p className="text-sm ">
+                          {group.categories[0] +
+                            ' - ' +
+                            puzzle.id.toUpperCase()}
+                        </p>
+                        <p className="text-sm">{winRate + '%'}</p>
+                      </Link>
+                    </li>
+                  )
+                },
+              )}
+            </Fragment>
+          ))}
         <div ref={observerElem} />
+        {!hasNextPage && !isLoading && (
+          <p className="text-xs">더 불러올 수 없습니다.</p>
+        )}
       </ul>
     </>
   )

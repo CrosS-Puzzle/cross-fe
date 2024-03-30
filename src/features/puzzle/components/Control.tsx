@@ -17,7 +17,7 @@ export default function Control() {
   }
 
   return (
-    <div className="w-fit ">
+    <div className="w-fit relative">
       <Description />
       <Input />
     </div>

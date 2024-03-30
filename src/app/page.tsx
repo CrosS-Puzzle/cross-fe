@@ -7,7 +7,7 @@ export default async function Home() {
 
   return (
     <>
-      <h2 className="mt-20 text-2xl font-bold tracking-tighter lg:text-3xl xl:text-4xl">
+      <h2 className="mt-10 text-2xl font-bold tracking-tighter lg:text-3xl xl:text-4xl">
         CS 용어 가로세로 낱말 퍼즐
       </h2>
       <p className="max-w-[600px] text-neutral-500 text-sm/relaxed lg:text-base/relaxed xl:text-lg/relaxed">
@@ -15,7 +15,7 @@ export default async function Home() {
       </p>
       <p className="text-neutral-500 pb-4">아래에서 카테고리를 선택해주세요.</p>
 
-      <div className="w-full max-w-[480px]">
+      <div className="w-full max-w-[480px] px-1">
         <h3 className="text-left pb-2 font-bold">카테고리</h3>
         <ul>
           {categories.length > 0 &&
