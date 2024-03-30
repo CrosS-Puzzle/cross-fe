@@ -10,7 +10,7 @@ export default function BackIcon({
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width={width}
-      height={width}
+      height={height}
       viewBox="0 0 1024 1024"
       fill={fill}
       className={className}

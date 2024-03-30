@@ -11,16 +11,16 @@ export const historySlice = createSlice({
   name: 'history',
   initialState,
   reducers: {
-    _addSolved(state, action: PayloadAction<string>) {
+    ADD_SOLVED(state, action: PayloadAction<string>) {
       state.solved.push(action.payload)
     },
-    _addChecked(state, action: PayloadAction<string>) {
+    ADD_CHECKED(state, action: PayloadAction<string>) {
       state.checked.push(action.payload)
     },
   },
 })
 
-export const { _addSolved, _addChecked } = historySlice.actions
+export const { ADD_SOLVED, ADD_CHECKED } = historySlice.actions
 
 export const selectSolvedList = (state: RootState) => state.history.solved
 export const selectCheckedList = (state: RootState) => state.history.checked

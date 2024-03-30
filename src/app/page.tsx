@@ -28,7 +28,7 @@ export default async function Home() {
                 return (
                   <li
                     key={category.id}
-                    className={`group text-neutral-800 hover:bg-neutral-300 hover:text-neutral-950 rounded-sm px-1 pt-1`}
+                    className="group text-neutral-800 hover:bg-neutral-300 hover:text-neutral-950 rounded-sm px-1 pt-1"
                   >
                     <Link
                       href={`/${category.id}`}

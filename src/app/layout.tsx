@@ -1,11 +1,11 @@
+import React from 'react'
 import localFont from 'next/font/local'
 import type { Metadata } from 'next'
 import './globals.css'
 
-import StoreProvider from './StoreProvider'
 import Provider from '@/utils/QueryProviders'
-import React from 'react'
 import Header from '@/features/header/Header'
+import StoreProvider from './StoreProvider'
 
 const pretendard = localFont({
   src: '../fonts/PretendardVariable.woff2',

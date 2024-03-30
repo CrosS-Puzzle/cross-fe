@@ -21,10 +21,12 @@ export default function Puzzles() {
   const categoryId = pathname.replace('/', '')
 
   const fetchPuzzles = async ({ pageParam = 0 }: { pageParam: number }) => {
-    return await getPuzzles(categoryId, sortBy, { pageParam })
+    const puzzles = await getPuzzles(categoryId, sortBy, { pageParam })
+
+    return puzzles
   }
 
-  const { data, isError, error, isLoading, hasNextPage, fetchNextPage } =
+  const { data, isError, isLoading, hasNextPage, fetchNextPage } =
     useInfiniteQuery({
       queryKey: ['puzzles', categoryId, sortBy],
       queryFn: fetchPuzzles,
@@ -54,7 +56,7 @@ export default function Puzzles() {
   // for 무한 스크롤
   useEffect(() => {
     const element = observerElem.current
-    let options = {
+    const options = {
       root: null,
       rootMargin: '0px',
       threshold: 1,
@@ -92,6 +94,7 @@ export default function Puzzles() {
 
       <div className="w-full max-w-[480px] flex flex-row items-center justify-between">
         <button
+          type="button"
           onClick={() => router.back()}
           className="flex flex-row items-center"
         >
@@ -116,8 +119,8 @@ export default function Puzzles() {
 
       <ul className="w-full max-w-[480px] h-full max-h-[calc(100vh-360px)] gap-y-2 overflow-auto">
         {data &&
-          data.pages.map((group, i) => (
-            <Fragment key={i}>
+          data.pages.map((group) => (
+            <Fragment key={group.currentPageNum}>
               {group.puzzles.map(
                 (puzzle: { id: string; wins: number; views: number }) => {
                   const winRate =
@@ -129,12 +132,10 @@ export default function Puzzles() {
                         href={`/puzzle/${puzzle.id}`}
                         className="px-2 py-1 rounded-md flex flex-row items-center justify-between text-neutral-600 hover:bg-neutral-300 hover:text-neutral-950"
                       >
-                        <p className="text-sm ">
-                          {group.categories[0] +
-                            ' - ' +
-                            puzzle.id.toUpperCase()}
+                        <p className="text-sm">
+                          {`${group.categories[0]} - ${puzzle.id.toUpperCase()}`}
                         </p>
-                        <p className="text-sm">{winRate + '%'}</p>
+                        <p className="text-sm">{`${winRate}%`}</p>
                       </Link>
                     </li>
                   )

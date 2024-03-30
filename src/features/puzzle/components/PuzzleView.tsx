@@ -35,13 +35,14 @@ export default function PuzzleView() {
           wordId
         ] as AnswerInfo
 
-        const selectedStyle = currentWord === wordId ? 'z-10' : ''
+        const selectedStyleBtn = currentWord === wordId ? 'z-10' : ''
 
         return (
           <button
+            type="button"
             onClick={() => handleWordClick(wordId)}
             key={word.id}
-            className={twMerge('absolute flex gap-1', selectedStyle)}
+            className={twMerge('absolute flex gap-1', selectedStyleBtn)}
             style={{
               top: `${coords[0] * 68 + 4}px`,
               left: `${coords[1] * 68 + 4}px`,
@@ -59,7 +60,7 @@ export default function PuzzleView() {
                   ? 'bg-neutral-400 text-black'
                   : 'bg-neutral-700 text-neutral-50'
 
-              const selectedStyle =
+              const selectedStyleDiv =
                 wordId === currentWord
                   ? 'border-4 border-neutral-500 animate-pulse'
                   : ''
@@ -68,11 +69,12 @@ export default function PuzzleView() {
 
               return (
                 <div
+                  // eslint-disable-next-line react/no-array-index-key
                   key={index}
                   className={twMerge(
                     'w-16 h-16 rounded-lg flex items-center justify-center',
                     colors,
-                    selectedStyle,
+                    selectedStyleDiv,
                     zIndex,
                   )}
                 >

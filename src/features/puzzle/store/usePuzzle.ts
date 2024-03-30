@@ -13,13 +13,17 @@ import {
 } from '@/features/puzzle/store/puzzleSlice'
 import { AnswerInfo, Puzzle } from '@/features/puzzle/constants/types'
 
-export const usePuzzle = () => {
+export default function usePuzzle() {
   const dispatch = useAppDispatch()
 
   const puzzle = useAppSelector(selectPuzzle)
   const currentWord = useAppSelector(selectSelectedWord)
   const solvedCount = useAppSelector(selectSolvedCount)
   const totalCount = useAppSelector(selectTotalCount)
+
+  const resetCurrentWord = () => {
+    dispatch(resetWord())
+  }
 
   const initiatePuzzle = (newPuzzle: any) => {
     if (puzzle && puzzle.id === newPuzzle.id) {
@@ -58,10 +62,6 @@ export const usePuzzle = () => {
 
   const setCurrentWord = (id: string) => {
     dispatch(setWord(id))
-  }
-
-  const resetCurrentWord = () => {
-    dispatch(resetWord())
   }
 
   const addAnswerInfo = (id: string, value: string) => {

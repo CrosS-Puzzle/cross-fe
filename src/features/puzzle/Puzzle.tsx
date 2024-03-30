@@ -1,3 +1,4 @@
+import { Suspense } from 'react'
 import {
   dehydrate,
   HydrationBoundary,
@@ -5,10 +6,9 @@ import {
 } from '@tanstack/react-query'
 
 import { getPuzzle } from '@/server/puzzle.actions'
+import Container from '@/features/puzzle/components/Container'
 
 import Fetcher from './components/Fetcher'
-import Container from '@/features/puzzle/components/Container'
-import { Suspense } from 'react'
 
 export default async function Puzzle({ id }: { id: string }) {
   const queryClient = new QueryClient()

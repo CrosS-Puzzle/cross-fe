@@ -2,24 +2,24 @@
 
 import { useAppSelector, useAppDispatch } from '@/store/hooks'
 import {
-  _addSolved,
-  _addChecked,
+  ADD_CHECKED,
+  ADD_SOLVED,
   selectSolvedList,
   selectCheckedList,
 } from '@/features/puzzle/store/historySlice'
 
-export const useHistory = () => {
+export default function useHistory() {
   const dispatch = useAppDispatch()
 
   const solvedList = useAppSelector(selectSolvedList)
   const checkedList = useAppSelector(selectCheckedList)
 
   const addSolved = (id: string) => {
-    dispatch(_addSolved(id))
+    dispatch(ADD_SOLVED(id))
   }
 
   const addChecked = (id: string) => {
-    dispatch(_addChecked(id))
+    dispatch(ADD_CHECKED(id))
   }
 
   const isFinished = (id: string) => {

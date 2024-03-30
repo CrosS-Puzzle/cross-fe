@@ -32,12 +32,10 @@ export default async function CategoryPage({
   })
 
   return (
-    <>
-      <HydrationBoundary state={dehydrate(queryClient)}>
-        <Suspense>
-          <Puzzles />
-        </Suspense>
-      </HydrationBoundary>
-    </>
+    <HydrationBoundary state={dehydrate(queryClient)}>
+      <Suspense>
+        <Puzzles />
+      </Suspense>
+    </HydrationBoundary>
   )
 }

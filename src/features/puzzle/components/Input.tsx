@@ -6,7 +6,9 @@ export default function Input() {
   const [input, setInput] = useState<string>('')
   const { addAnswerInfo, currentWord, puzzle } = usePuzzle()
 
-  if (!currentWord || !puzzle) return
+  if (!currentWord || !puzzle) {
+    throw new Error('Puzzle is not loaded')
+  }
 
   const { length } = puzzle.answerInfos[currentWord]
 
@@ -47,6 +49,7 @@ export default function Input() {
         disabled={!currentWord}
       />
       <button
+        type="button"
         disabled={length !== input.length}
         onClick={verifyAnswer}
         className="w-fit min-w-20 ml-2 bg-neutral-700 border border-neutral-700 text-neutral-50 py-1 px-2 rounded-md disabled:bg-transparent disabled:cursor-not-allowed disabled:border disabled:border-neutral-400 disabled:text-neutral-400"

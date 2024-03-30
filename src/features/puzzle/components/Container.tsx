@@ -1,13 +1,12 @@
 'use client'
 
-import Link from 'next/link'
 import { usePuzzle } from '@/features/puzzle/store/usePuzzle'
 import PuzzleView from '@/features/puzzle/components/PuzzleView'
 import Control from '@/features/puzzle/components/Control'
 import Status from '@/features/puzzle/components/Status'
 import { useRouter } from 'next/navigation'
 import BackIcon from '@/icons/Back'
-import { useCallback, useEffect, useRef } from 'react'
+import { useCallback, useEffect } from 'react'
 
 export default function Container() {
   const { puzzle, solvedCount, totalCount } = usePuzzle()
@@ -38,6 +37,7 @@ export default function Container() {
       <div className="w-fit flex flex-col items-center">
         <div className="w-fit">
           <button
+            type="button"
             onClick={() => router.back()}
             className="flex items-center mb-2"
           >

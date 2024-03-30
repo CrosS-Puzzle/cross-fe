@@ -16,7 +16,7 @@ export async function getPuzzles(
 
     return responseBody.data
   } catch (error) {
-    return { error: error }
+    return { error }
   }
 }
 
@@ -30,7 +30,7 @@ export async function getPuzzle(id: string, withAnswer: boolean = false) {
 
     return responseBody.data
   } catch (error) {
-    return { error: error }
+    return { error }
   }
 }
 
@@ -42,8 +42,8 @@ export async function checkWord(id: string, input: string): Promise<boolean> {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        id: id,
-        input: input,
+        id,
+        input,
       }),
     })
 

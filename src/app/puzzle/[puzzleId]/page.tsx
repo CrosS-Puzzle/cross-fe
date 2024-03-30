@@ -1,6 +1,6 @@
 import Puzzle from '@/features/puzzle/Puzzle'
 
-export default async function ({
+export default async function Page({
   params,
 }: {
   params: {

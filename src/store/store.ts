@@ -1,9 +1,8 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
 import storage from 'redux-persist/lib/storage'
-import { puzzleSlice } from '@/features/puzzle/store/puzzleSlice'
-import { historySlice } from '@/features/puzzle/store/historySlice'
-import { persistReducer, persistStore } from 'redux-persist'
 import {
+  persistReducer,
+  persistStore,
   FLUSH,
   PAUSE,
   PERSIST,
@@ -11,6 +10,8 @@ import {
   REGISTER,
   REHYDRATE,
 } from 'redux-persist'
+import { historySlice } from '@/features/puzzle/store/historySlice'
+import { puzzleSlice } from '@/features/puzzle/store/puzzleSlice'
 
 const persistConfig = {
   key: 'puzzle-history',
@@ -39,16 +40,16 @@ export const makeStore = () => {
 
   if (isServer) {
     return makeConfiguredStore()
-  } else {
-    const persistedReducers = persistReducer(persistConfig, reducers)
-
-    let store: any = configureStore({
-      reducer: persistedReducers,
-    })
-
-    store.__persistor = persistStore(store)
-    return store
   }
+
+  const persistedReducers = persistReducer(persistConfig, reducers)
+
+  const store = configureStore({
+    reducer: persistedReducers,
+  })
+
+  store.__persistor = persistStore(store)
+  return store
 }
 
 // Infer the type of makeStore
