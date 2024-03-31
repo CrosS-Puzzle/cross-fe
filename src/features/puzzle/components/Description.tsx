@@ -1,6 +1,6 @@
 'use client'
 
-import { usePuzzle } from '@/features/puzzle/store/usePuzzle'
+import usePuzzle from '@/features/puzzle/store/usePuzzle'
 
 export default function Description() {
   const { currentWord, puzzle } = usePuzzle()

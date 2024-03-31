@@ -1,7 +1,7 @@
 'use client'
 
 import { twMerge } from 'tailwind-merge'
-import { usePuzzle } from '@/features/puzzle/store/usePuzzle'
+import usePuzzle from '@/features/puzzle/store/usePuzzle'
 import { AnswerInfo } from '@/features/puzzle/constants/types'
 
 export default function PuzzleView() {

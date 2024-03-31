@@ -1,4 +1,4 @@
-import { usePuzzle } from '@/features/puzzle/store/usePuzzle'
+import usePuzzle from '@/features/puzzle/store/usePuzzle'
 
 export default function Status() {
   const { solvedCount, totalCount } = usePuzzle()

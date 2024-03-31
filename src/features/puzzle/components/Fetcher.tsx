@@ -3,7 +3,7 @@
 import { getPuzzle } from '@/server/puzzle.actions'
 import { useQuery } from '@tanstack/react-query'
 import { ReactNode } from 'react'
-import { usePuzzle } from '@/features/puzzle/store/usePuzzle'
+import usePuzzle from '@/features/puzzle/store/usePuzzle'
 
 export default function PuzzleFetcher({
   id,
