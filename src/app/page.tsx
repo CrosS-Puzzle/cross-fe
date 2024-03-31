@@ -18,7 +18,8 @@ export default async function Home() {
       <div className="w-full max-w-[480px] px-1">
         <h3 className="text-left pb-2 font-bold">카테고리</h3>
         <ul>
-          {categories.length > 0 &&
+          {categories &&
+            categories.length > 0 &&
             categories.map(
               (category: {
                 id: string

@@ -1,6 +1,6 @@
 'use client'
 
-import { usePuzzle } from '@/features/puzzle/store/usePuzzle'
+import usePuzzle from '@/features/puzzle/store/usePuzzle'
 import Description from '@/features/puzzle/components/Description'
 import Input from '@/features/puzzle/components/Input'
 
