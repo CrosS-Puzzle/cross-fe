@@ -10,7 +10,7 @@ export default async function getCategories() {
     })
 
     const responseBody = await response.json()
-    return responseBody.dsata
+    return responseBody.data
   } catch (error) {
     return { error }
   }

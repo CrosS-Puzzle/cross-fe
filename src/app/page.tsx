@@ -5,6 +5,8 @@ import React from 'react'
 export default async function Home() {
   const categories = await getCategories()
 
+  console.log(categories)
+
   return (
     <>
       <h2 className="mt-10 text-2xl font-bold tracking-tighter lg:text-3xl xl:text-4xl">
