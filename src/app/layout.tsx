@@ -5,6 +5,7 @@ import './globals.css'
 
 import Provider from '@/utils/QueryProviders'
 import Header from '@/features/header/Header'
+import ModalContainer from '@/features/modal/ModalContainer'
 import StoreProvider from './StoreProvider'
 
 const pretendard = localFont({
@@ -36,6 +37,7 @@ export default function RootLayout({
               </div>
             </main>
             <div id="modal-root" />
+            <ModalContainer />
           </Provider>
         </StoreProvider>
       </body>

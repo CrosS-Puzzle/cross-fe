@@ -12,6 +12,7 @@ import {
 } from 'redux-persist'
 import { historySlice } from '@/features/puzzle/store/historySlice'
 import { puzzleSlice } from '@/features/puzzle/store/puzzleSlice'
+import { modalSlice } from '@/features/modal/store/modalSlice'
 
 const persistConfig = {
   key: 'puzzle-history',
@@ -22,6 +23,7 @@ const persistConfig = {
 const reducers = combineReducers({
   puzzle: puzzleSlice.reducer,
   history: historySlice.reducer,
+  modal: modalSlice.reducer,
 })
 
 const makeConfiguredStore = () =>
