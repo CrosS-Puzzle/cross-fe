@@ -4,6 +4,7 @@ import { getPuzzle } from '@/server/puzzle.actions'
 import { useQuery } from '@tanstack/react-query'
 import { ReactNode } from 'react'
 import usePuzzle from '@/features/puzzle/store/usePuzzle'
+import useHistory from '../store/useHistory'
 
 export default function PuzzleFetcher({
   id,
@@ -13,9 +14,11 @@ export default function PuzzleFetcher({
   children: ReactNode
 }) {
   const { initiatePuzzle } = usePuzzle()
+  const { isFinished } = useHistory()
+
   const { data, error } = useQuery({
-    queryKey: ['puzzle', id],
-    queryFn: () => getPuzzle(id, false),
+    queryKey: ['puzzle', id, isFinished(id)],
+    queryFn: () => getPuzzle(id, isFinished(id)),
   })
 
   if (error) {
