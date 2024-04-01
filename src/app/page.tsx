@@ -5,8 +5,6 @@ import React from 'react'
 export default async function Home() {
   const categories = await getCategories()
 
-  console.log(categories)
-
   return (
     <>
       <h2 className="mt-10 text-2xl font-bold tracking-tighter lg:text-3xl xl:text-4xl">
@@ -31,14 +29,14 @@ export default async function Home() {
                 return (
                   <li
                     key={category.id}
-                    className="group text-neutral-800 hover:bg-neutral-300 hover:text-neutral-950 rounded-sm px-1 pt-1"
+                    className="group text-neutral-800 hover:bg-neutral-300 hover:text-neutral-950 rounded-md p-2 border border-neutral-300 mb-2"
                   >
                     <Link
-                      href={`/${category.id}`}
-                      className="w-full flex flex-row justify-between items-center pb-1 mb-1 border-b border-neutral-300"
+                      href={`/category/${category.id}`}
+                      className="w-full flex flex-row justify-between items-center px-2"
                     >
                       <span className="text-sm">{category.koreanName}</span>
-                      <span className="text-xs">{category.puzzleCount}</span>
+                      <span className="text-sm">{category.puzzleCount}</span>
                     </Link>
                   </li>
                 )

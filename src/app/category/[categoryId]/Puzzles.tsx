@@ -12,13 +12,16 @@ import { usePathname, useRouter } from 'next/navigation'
 import { getPuzzles } from '@/server/puzzle.actions'
 import Link from 'next/link'
 import BackIcon from '@/icons/Back'
+import categoryInfos from './categoryInfos'
 
 export default function Puzzles() {
   const router = useRouter()
   const observerElem = useRef(null)
   const [sortBy, setSortBy] = useState<'asc' | 'desc'>('asc')
   const pathname = usePathname()
-  const categoryId = pathname.replace('/', '')
+  const categoryId = pathname.split('/')[2]
+
+  const categoryInfo = categoryInfos.find((elem) => elem.id === categoryId)
 
   const fetchPuzzles = async ({ pageParam = 0 }: { pageParam: number }) => {
     const puzzles = await getPuzzles(categoryId, sortBy, { pageParam })
@@ -89,7 +92,7 @@ export default function Puzzles() {
       <p className="text-neutral-500 pb-4">아래에서 문제를 선택해주세요.</p>
 
       <h3 className="font-bold text-base lg:text-2xl">
-        {data && data.pages[0].categories[0]} 퍼즐
+        {categoryInfo?.koreanName}
       </h3>
 
       <div className="w-full max-w-[480px] flex flex-row items-center justify-between">
@@ -127,10 +130,13 @@ export default function Puzzles() {
                     ((puzzle.wins / puzzle.views) * 100 || 0).toFixed(1) || 0
 
                   return (
-                    <li key={puzzle.id} className="pb-1 w-full">
+                    <li
+                      key={puzzle.id}
+                      className="p-2 w-full border mb-1 hover:bg-neutral-300 hover:text-neutral-950 rounded-md"
+                    >
                       <Link
                         href={`/puzzle/${puzzle.id}`}
-                        className="px-2 py-1 rounded-md flex flex-row items-center justify-between text-neutral-600 hover:bg-neutral-300 hover:text-neutral-950"
+                        className="px-2 py-1  flex flex-row items-center justify-between text-neutral-600 "
                       >
                         <p className="text-sm">
                           {`${group.categories[0]} - ${puzzle.id.toUpperCase()}`}

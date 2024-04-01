@@ -5,7 +5,7 @@ import {
   QueryClient,
 } from '@tanstack/react-query'
 import { Suspense } from 'react'
-import Puzzles from '@/app/[categoryId]/Puzzles'
+import Puzzles from '@/app/category/[categoryId]/Puzzles'
 
 export default async function CategoryPage({
   params,
@@ -15,6 +15,8 @@ export default async function CategoryPage({
   }
 }) {
   const { categoryId } = params
+
+  console.log(categoryId)
 
   const queryClient = new QueryClient()
   await queryClient.prefetchInfiniteQuery({
