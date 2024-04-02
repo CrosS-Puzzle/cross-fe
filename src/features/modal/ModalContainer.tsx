@@ -5,10 +5,15 @@ import { createPortal } from 'react-dom'
 import useModal from './store/useModal'
 import { Modal } from './store/modalSlice'
 import ModalWrapper from './ModalWrapper'
+import IncorrectModal from './modalTypes/Incorrect.modal'
+import AlreadyDoneModal from './modalTypes/AlreadyDone.modal'
 
 const MODAL_COMPONENTS: {
   [key: string]: (props: any) => ReactElement
-} = {}
+} = {
+  incorrect: IncorrectModal,
+  'already-done': AlreadyDoneModal,
+}
 
 export default function Container() {
   const [mounted, setMounted] = useState<boolean>(false)

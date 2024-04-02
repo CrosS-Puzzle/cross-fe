@@ -1,14 +1,28 @@
 'use client'
 
+import { useEffect } from 'react'
 import usePuzzle from '@/features/puzzle/store/usePuzzle'
 import Description from '@/features/puzzle/components/Description'
 import Input from '@/features/puzzle/components/Input'
-import { useEffect } from 'react'
+import useModal from '@/features/modal/store/useModal'
 import useHistory from '../store/useHistory'
 
 export default function Control() {
   const { puzzle, currentWord, solvedCount, totalCount } = usePuzzle()
-  const { addSolved } = useHistory()
+  const { addSolved, isFinished } = useHistory()
+  const { openModal } = useModal()
+
+  useEffect(() => {
+    const checkAlreadyDone = () => {
+      if (puzzle && solvedCount !== totalCount) {
+        if (isFinished(puzzle.id)) {
+          openModal({ type: 'already-done' })
+        }
+      }
+    }
+
+    checkAlreadyDone()
+  }, [puzzle])
 
   useEffect(() => {
     const completePuzzle = async () => {

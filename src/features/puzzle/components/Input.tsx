@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
 import usePuzzle from '@/features/puzzle/store/usePuzzle'
 import { checkWord } from '@/server/puzzle.actions'
+import useModal from '@/features/modal/store/useModal'
 
 export default function Input() {
   const [input, setInput] = useState<string>('')
   const { addAnswerInfo, currentWord, puzzle } = usePuzzle()
+  const { openModal } = useModal()
 
   if (!currentWord || !puzzle) {
     throw new Error('Puzzle is not loaded')
@@ -30,7 +32,7 @@ export default function Input() {
     if (isCorrect) {
       addAnswerInfo(currentWord, input)
     } else {
-      // TODO: Modal 추가
+      openModal({ type: 'incorrect' })
     }
 
     setInput('')

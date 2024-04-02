@@ -13,7 +13,7 @@ import Fetcher from './components/Fetcher'
 export default async function Puzzle({ id }: { id: string }) {
   const queryClient = new QueryClient()
   await queryClient.prefetchQuery({
-    queryKey: ['puzzle', id],
+    queryKey: ['puzzle', id, false],
     queryFn: () => getPuzzle(id, false),
   })
 

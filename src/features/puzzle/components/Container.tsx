@@ -7,11 +7,9 @@ import Status from '@/features/puzzle/components/Status'
 import { useRouter } from 'next/navigation'
 import BackIcon from '@/icons/Back'
 import { useCallback, useEffect } from 'react'
-import useHistory from '../store/useHistory'
 
 export default function Container() {
   const { puzzle, solvedCount, totalCount } = usePuzzle()
-  const { addSolved } = useHistory()
   const router = useRouter()
 
   // 새로고침, 페이지 닫기 감지
