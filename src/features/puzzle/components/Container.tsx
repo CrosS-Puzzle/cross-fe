@@ -46,10 +46,10 @@ export default function Container() {
           </button>
         </div>
         <div className="overflow-auto border-2 relative">
-          <Status />
+          {puzzle && <Status />}
           {puzzle && <PuzzleView />}
         </div>
-        <Control />{' '}
+        {puzzle && <Control />}
       </div>
     </div>
   )

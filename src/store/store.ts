@@ -1,5 +1,4 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
-import storage from 'redux-persist/lib/storage'
 import {
   persistReducer,
   persistStore,
@@ -13,6 +12,27 @@ import {
 import { historySlice } from '@/features/puzzle/store/historySlice'
 import { puzzleSlice } from '@/features/puzzle/store/puzzleSlice'
 import { modalSlice } from '@/features/modal/store/modalSlice'
+import createWebStorage from 'redux-persist/es/storage/createWebStorage'
+
+// redux-persist failed to create sync storage issue fix
+const createNoopStorage = () => {
+  return {
+    getItem(_key: string) {
+      return Promise.resolve(null)
+    },
+    setItem(_key: string, value: string) {
+      return Promise.resolve(value)
+    },
+    removeItem(_key: string) {
+      return Promise.resolve()
+    },
+  }
+}
+
+const storage =
+  typeof window === 'undefined'
+    ? createNoopStorage()
+    : createWebStorage('local')
 
 const persistConfig = {
   key: 'puzzle-history',
@@ -33,6 +53,7 @@ const makeConfiguredStore = () =>
       getDefaultMiddleware({
         serializableCheck: {
           ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+          ignoredPaths: ['puzzle.puzzle'],
         },
       }),
   })

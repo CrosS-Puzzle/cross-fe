@@ -1,3 +1,5 @@
+'use client'
+
 import React, { useState } from 'react'
 import usePuzzle from '@/features/puzzle/store/usePuzzle'
 import { checkWord } from '@/server/puzzle.actions'

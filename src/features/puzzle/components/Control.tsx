@@ -22,11 +22,11 @@ export default function Control() {
     }
 
     checkAlreadyDone()
-  }, [puzzle])
+  }, [puzzle, solvedCount, totalCount])
 
   useEffect(() => {
     const completePuzzle = async () => {
-      await fetch(`/api/complete?id=${puzzle?.puzzleId}`, {
+      await fetch(`/api/complete?id=${puzzle.puzzleId}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -37,11 +37,11 @@ export default function Control() {
     if (puzzle) {
       if (solvedCount === totalCount) {
         addSolved(puzzle.id)
-
+        openModal({ type: 'complete' })
         completePuzzle()
       }
     }
-  }, [solvedCount])
+  }, [solvedCount,totalCount])
 
   if (!currentWord) {
     return (

@@ -4,6 +4,8 @@ import { open, close, selectModals } from './modalSlice'
 export default function useModal() {
   const dispatch = useAppDispatch()
 
+  const modals = useAppSelector(selectModals)
+
   const openModal = ({ type, props }: { type: string; props?: any }) => {
     dispatch(open({ type, props }))
   }
@@ -11,8 +13,6 @@ export default function useModal() {
   const closeModal = () => {
     dispatch(close())
   }
-
-  const modals = useAppSelector(selectModals)
 
   return {
     openModal,
