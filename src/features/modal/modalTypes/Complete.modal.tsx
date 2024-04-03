@@ -1,11 +1,9 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
-import usePuzzle from '@/features/puzzle/store/usePuzzle'
 import useModal from '../store/useModal'
 
 export default function Complete() {
-  const { reset } = usePuzzle()
   const { closeModal } = useModal()
   const router = useRouter()
 

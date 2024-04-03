@@ -41,7 +41,7 @@ export default function Control() {
         completePuzzle()
       }
     }
-  }, [solvedCount,totalCount])
+  }, [solvedCount, totalCount])
 
   if (!currentWord) {
     return (

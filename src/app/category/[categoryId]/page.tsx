@@ -16,8 +16,6 @@ export default async function CategoryPage({
 }) {
   const { categoryId } = params
 
-  console.log(categoryId)
-
   const queryClient = new QueryClient()
   await queryClient.prefetchInfiniteQuery({
     queryKey: ['puzzles', categoryId, 'asc'],
